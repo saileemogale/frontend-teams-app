@@ -4,9 +4,9 @@
   <b-container fluid>
     <b-form-input v-model="text" placeholder="Search"></b-form-input>
         <b-row v-for="(item, index) in teamList" :key="index" v-if="index%3 == 0">
-          <b-col><b-img :src="item.img" fluid alt="Responsive image"></b-img></b-col>
-          <b-col><b-img v-if="teamList[index+1]" :src="teamList[index+1].img" fluid alt="Responsive image"></b-img></b-col>
-          <b-col><b-img v-if="teamList[index+2]" :src="teamList[index+2].img" fluid alt="Responsive image"></b-img></b-col>
+          <b-col :class="`team-col`"><b-img :class="`team-img`" :src="item.img" fluid alt="Responsive image"></b-img></b-col>
+          <b-col :class="`team-col`"><b-img :class="`team-img`" v-if="teamList[index+1]" :src="teamList[index+1].img" fluid alt="Responsive image"></b-img></b-col>
+          <b-col :class="`team-col`"><b-img :class="`team-img`" v-if="teamList[index+2]" :src="teamList[index+2].img" fluid alt="Responsive image"></b-img></b-col>
         </b-row>
   </b-container>
 </template>
@@ -118,5 +118,12 @@ li {
 }
 a {
   color: #42b983;
+}
+.team-col {
+  margin-top: 50px;
+}
+.team-img {
+  height: 200px;
+  width: 200px
 }
 </style>
