@@ -22,4 +22,9 @@ npm run unit
 
 # run all tests
 npm test
+
+Application URL: https://teams-frontend-app.herokuapp.com/
+
+## Configured CI/CD
+Travis URL - https://travis-ci.org/saileemogale/frontend-teams-app
 ```
