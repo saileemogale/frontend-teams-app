@@ -5,8 +5,7 @@
   "author": "Sailee Mogale <sailee.reddy@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "webpack --config build/webpack.prod.conf.js",
+    "start": "node server.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit",
@@ -16,6 +15,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.24",
+    "express": "^4.17.1",
     "shelljs": "^0.8.3",
     "vlightbox": "^2.0.2",
     "vue": "^2.6.10",
@@ -86,7 +86,6 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^2.9.7",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
