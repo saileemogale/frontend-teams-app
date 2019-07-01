@@ -1,103 +1,121 @@
 
 
 <template >
-  <b-container fluid>
-    <b-form-input v-model="text" placeholder="Search"></b-form-input>
-        <b-row v-for="(item, index) in teamList" :key="index" v-if="index%3 == 0">
-          <b-col :class="`team-col`"><b-img :class="`team-img`" :src="item.img" fluid alt="Responsive image"></b-img></b-col>
-          <b-col :class="`team-col`"><b-img :class="`team-img`" v-if="teamList[index+1]" :src="teamList[index+1].img" fluid alt="Responsive image"></b-img></b-col>
-          <b-col :class="`team-col`"><b-img :class="`team-img`" v-if="teamList[index+2]" :src="teamList[index+2].img" fluid alt="Responsive image"></b-img></b-col>
-        </b-row>
-  </b-container>
+<div>
+  <div class="search-wrapper">
+    <input type="text" v-model="search" placeholder="Search"/>
+  </div>
+  <lightbox :images="filteredList" :caption="true"></lightbox>
+</div>
 </template>
 
 <script>
+
 export default {
-  name: 'Football Teams',
   data () {
     return {
-      teamList: [
+      search: '',
+      images: [
         	{
-            "name": "Arsenal",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/632.jpg"
+            "caption": "Arsenal",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/632.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/632.jpg"
           },
           {
-            "name": "Bournemouth",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/631.jpg"
+            "caption": "Bournemouth",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/631.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/631.jpg"
           },
           {
-            "name": "Brighton & Hove Albion",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2465.jpg"
+            "caption": "Brighton & Hove Albion",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2465.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2465.jpg"
           },
           {
-            "name": "Burnley",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/650.jpg"
+            "caption": "Burnley",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/650.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/650.jpg"
           },
           {
-            "name": "Cardiff City",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/5542.jpg"
+            "caption": "Chelsea",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/635.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/635.jpg"
           },
           {
-            "name": "Chelsea",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/635.jpg"
+            "caption": "Crystal Palace",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/637.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/637.jpg"
           },
           {
-            "name": "Crystal Palace",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/637.jpg"
+            "caption": "Everton",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/639.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/639.jpg"
           },
           {
-            "name": "Everton",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/639.jpg"
+            "caption": "Huddersfield Town",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2464.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2464.jpg"
           },
           {
-            "name": "Fulham",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/5770.jpg"
+            "caption": "Manchester United",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/645.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/645.jpg"
           },
           {
-            "name": "Huddersfield Town",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2464.jpg"
+            "caption": "Liverpool",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/646.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/646.jpg"
           },
           {
-            "name": "Manchester United",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/645.jpg"
+            "caption": "Leicester City",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/633.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/633.jpg"
           },
           {
-            "name": "Liverpool",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/646.jpg"
+            "caption": "Manchester City",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/642.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/642.jpg"
           },
           {
-            "name": "Leicester City",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/633.jpg"
+            "caption": "Newcastle United",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2463.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2463.jpg"
           },
           {
-            "name": "Manchester City",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/642.jpg"
+            "caption": "Wolverhampton",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/5543.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/5543.jpg"
           },
           {
-            "name": "Newcastle United",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/2463.jpg"
+            "caption": "Tottenham Hotspur",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/648.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/648.jpg"
           },
           {
-            "name": "Wolverhampton",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/5543.jpg"
+            "caption": "Southampton",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/647.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/647.jpg"
           },
           {
-            "name": "Tottenham Hotspur",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/648.jpg"
+            "caption": "West Ham United",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/640.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/640.jpg"
           },
           {
-            "name": "Southampton",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/647.jpg"
-          },
-          {
-            "name": "West Ham United",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/640.jpg"
-          },
-          {
-            "name": "Watford",
-            "img": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/638.jpg"
+            "caption": "Watford",
+            "src": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/638.jpg",
+            "thumb": "https://s3-eu-west-1.amazonaws.com/inconbucket/images/entities/original/638.jpg"
           }
       ] 
+    }
+  },
+  computed: {
+    filteredList: function filteredList() {
+      var _this = this;
+
+      return this.images.filter(function (image) {
+        return image.caption.toLowerCase().includes(_this.search.toLowerCase());
+      });
     }
   }
 }
