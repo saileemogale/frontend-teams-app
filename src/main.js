@@ -3,14 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-//import BootstrapVue from 'bootstrap-vue'
-
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-//import VueLazyLoad from 'vue-lazyload'
-import lightbox from 'vlightbox';
-
+import lightbox from 'vlightbox'
 
 Vue.config.productionTip = false
 
@@ -19,6 +12,8 @@ Vue.use(lightbox)
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })
